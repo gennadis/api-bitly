@@ -61,5 +61,17 @@ def count_clicks(token: str, bitlink: str) -> int:
     return clicks
 
 
+def is_bitlink(url: str) -> bool:
+    parsed_url = urllib.parse.urlparse(url)
+    bitlink = f"{parsed_url.netloc}{parsed_url.path}"
+    endpoint = f"{BASE_URL}/bitlinks/{bitlink}"
+    headers = {
+        "Authorization": f"Bearer {TOKEN}",
+    }
+
+    response = requests.get(url=endpoint, headers=headers)
+    return response.ok
+
+
 if __name__ == "__main__":
     pass
