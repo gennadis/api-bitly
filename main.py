@@ -39,10 +39,16 @@ def shorten_link(token: str, url: str) -> str:
 
     response = requests.post(url=endpoint, headers=headers, data=json.dumps(data))
     response.raise_for_status()
+    bitlink = response.json().get("id")
 
-    return response.json().get("id")
+    return bitlink
 
 
 if __name__ == "__main__":
-    user_url = input("Enter full url to be shorten... ")
-    print("Битлинк", shorten_link(TOKEN, user_url))
+    user_url = input("Enter full URL (like http://google.com) to be shorten... ")
+    try:
+        bitlink = shorten_link(TOKEN, user_url)
+    except requests.exceptions.HTTPError as e:
+        print(f"URL validation error - {e}")
+    else:
+        print("Битлинк", bitlink)
