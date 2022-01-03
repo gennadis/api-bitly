@@ -1,7 +1,9 @@
 import os
 import json
+import urllib
 import requests
 from dotenv import load_dotenv
+from requests.api import head
 
 load_dotenv()
 TOKEN = os.environ.get("TOKEN")
@@ -44,11 +46,20 @@ def shorten_link(token: str, url: str) -> str:
     return bitlink
 
 
+def count_clicks(token: str, bitlink: str) -> int:
+    """Returns the click counts for a Bitlink"""
+
+    endpoint = f"{BASE_URL}/bitlinks/{bitlink}/clicks/summary"
+    headers = {
+        "Authorization": f"Bearer {token}",
+    }
+
+    response = requests.get(url=endpoint, headers=headers)
+    response.raise_for_status()
+    clicks: int = response.json().get("total_clicks")
+
+    return clicks
+
+
 if __name__ == "__main__":
-    user_url = input("Enter full URL (like http://google.com) to be shorten... ")
-    try:
-        bitlink = shorten_link(TOKEN, user_url)
-    except requests.exceptions.HTTPError as e:
-        print(f"URL validation error - {e}")
-    else:
-        print("Битлинк", bitlink)
+    pass
