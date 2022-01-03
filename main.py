@@ -3,12 +3,6 @@ import json
 import urllib
 import requests
 from dotenv import load_dotenv
-from requests.api import head
-
-load_dotenv()
-TOKEN = os.environ.get("TOKEN")
-
-BASE_URL = "https://api-ssl.bitly.com/v4"
 
 
 def get_user_info() -> dict:
@@ -62,6 +56,8 @@ def count_clicks(token: str, bitlink: str) -> int:
 
 
 def is_bitlink(url: str) -> bool:
+    """Check if URL is a Bitlink"""
+
     parsed_url = urllib.parse.urlparse(url)
     bitlink = f"{parsed_url.netloc}{parsed_url.path}"
     endpoint = f"{BASE_URL}/bitlinks/{bitlink}"
@@ -70,10 +66,16 @@ def is_bitlink(url: str) -> bool:
     }
 
     response = requests.get(url=endpoint, headers=headers)
+
     return response.ok
 
 
 if __name__ == "__main__":
+
+    load_dotenv()
+    TOKEN = os.environ.get("TOKEN")
+    BASE_URL = "https://api-ssl.bitly.com/v4"
+
     user_url = input("Please enter your URL: ")
     if is_bitlink(user_url):
         try:
