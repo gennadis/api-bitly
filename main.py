@@ -74,4 +74,18 @@ def is_bitlink(url: str) -> bool:
 
 
 if __name__ == "__main__":
-    pass
+    user_url = input("Please enter your URL: ")
+    if is_bitlink(user_url):
+        try:
+            count = count_clicks(TOKEN, user_url)
+        except requests.exceptions.HTTPError as e:
+            print(f"Bitlink validation error - {e}")
+        else:
+            print("Click counts:", count)
+    else:
+        try:
+            bitlink = shorten_link(TOKEN, user_url)
+        except requests.exceptions.HTTPError as e:
+            print(f"URL validation error - {e}")
+        else:
+            print("Bitlink:", bitlink)
