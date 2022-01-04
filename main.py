@@ -4,6 +4,10 @@ import urllib
 import requests
 from dotenv import load_dotenv
 
+load_dotenv()
+TOKEN = os.environ.get("BITLY_TOKEN")
+BASE_URL = "https://api-ssl.bitly.com/v4"
+
 
 def get_user_info() -> dict:
     """Returns information for the current authenticated user"""
@@ -70,12 +74,7 @@ def is_bitlink(url: str) -> bool:
     return response.ok
 
 
-if __name__ == "__main__":
-
-    load_dotenv()
-    TOKEN = os.environ.get("BITLY_TOKEN")
-    BASE_URL = "https://api-ssl.bitly.com/v4"
-
+def main():
     user_url = input("Please enter your URL: ")
     if is_bitlink(user_url):
         try:
@@ -91,3 +90,7 @@ if __name__ == "__main__":
             print(f"URL validation error - {e}")
         else:
             print("Bitlink:", bitlink)
+
+
+if __name__ == "__main__":
+    main()
