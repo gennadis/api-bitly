@@ -1,5 +1,4 @@
 import os
-import json
 import urllib
 import requests
 from dotenv import load_dotenv
@@ -28,7 +27,7 @@ def shorten_link(token: str, base_url: str, endpoint: str, link: str) -> str:
         "domain": "bit.ly",
     }
 
-    response = requests.post(url=url, headers=headers, data=json.dumps(data))
+    response = requests.post(url=url, headers=headers, json=data)
     response.raise_for_status()
     bitlink = response.json().get("id")
 
