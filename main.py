@@ -73,7 +73,7 @@ def is_bitlink(url: str) -> bool:
 if __name__ == "__main__":
 
     load_dotenv()
-    TOKEN = os.environ.get("TOKEN")
+    TOKEN = os.environ.get("BITLY_TOKEN")
     BASE_URL = "https://api-ssl.bitly.com/v4"
 
     user_url = input("Please enter your URL: ")
