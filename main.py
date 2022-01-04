@@ -6,7 +6,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 TOKEN = os.environ.get("BITLY_TOKEN")
-BASE_URL = "https://api-ssl.bitly.com/v4"
+BASE_URL = "https://api-ssl.bitly.com"
+ENDPOINTS = {
+    "shorten": "/v4/shorten",
+    "clicks": "/v4/bitlinks/{}/clicks/summary",  # bitlink
+    "is_bitlink": "/v4/bitlinks/{}",  # bitlink
+}
 
 
 def shorten_link(token: str, url: str) -> str:
