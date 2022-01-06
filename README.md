@@ -28,5 +28,19 @@ pip install -r requirements.txt
 
 5. Run
 ```bash
-python main.py
+python main.py URL
 ```
+## Examples
+
+Lets say you want to shorten this link: ```https://www.reddit.com/r/python```
+
+So you have to run main.py with this URL as an argument.
+```bash
+python main.py https://www.reddit.com/r/python
+```
+
+You'll get a Bitlink:
+```bash
+Bitlink: bit.ly/3qWSato
+```
+
