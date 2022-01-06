@@ -1,6 +1,8 @@
 import os
 import urllib
 import requests
+import argparse
+
 from dotenv import load_dotenv
 
 
@@ -10,6 +12,9 @@ ENDPOINTS = {
     "clicks": "/v4/bitlinks/{}/clicks/summary",  # bitlink
     "is_bitlink": "/v4/bitlinks/{}",  # bitlink
 }
+
+parser = argparse.ArgumentParser()
+parser.add_argument("link", help="enter link to shorten or to get clicks count of")
 
 
 def shorten_link(token: str, base_url: str, endpoint: str, link: str) -> str:
@@ -65,11 +70,12 @@ def is_bitlink(token: str, base_url: str, endpoint: str, link: str) -> bool:
 
 
 def main():
-
     load_dotenv()
     token = os.environ.get("BITLY_TOKEN")
 
-    user_link = input("Please enter your URL: ")
+    args = parser.parse_args()
+    user_link = args.link
+
     if is_bitlink(token, BASE_URL, ENDPOINTS["is_bitlink"], user_link):
         try:
             count = count_clicks(token, BASE_URL, ENDPOINTS["clicks"], user_link)
