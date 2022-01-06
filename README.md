@@ -39,8 +39,18 @@ So you have to run main.py with this URL as an argument.
 python main.py https://www.reddit.com/r/python
 ```
 
-You'll get a Bitlink:
+Voila! You now have a Bitlink to share!
 ```bash
 Bitlink: bit.ly/3qWSato
 ```
 
+Or maybe you want to get some stats of Biltlink you've got there.
+Just run main.py with your Bitlink as an argument.
+```bash
+python main.py bit.ly/3qWSato
+```
+
+And the answer is:
+```bash
+Click counts: 7
+```
