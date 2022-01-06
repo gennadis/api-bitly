@@ -3,8 +3,7 @@ import urllib
 import requests
 from dotenv import load_dotenv
 
-load_dotenv()
-TOKEN = os.environ.get("BITLY_TOKEN")
+
 BASE_URL = "https://api-ssl.bitly.com"
 ENDPOINTS = {
     "shorten": "/v4/shorten",
@@ -66,6 +65,10 @@ def is_bitlink(base_url: str, endpoint: str, link: str) -> bool:
 
 
 def main():
+
+    load_dotenv()
+    TOKEN = os.environ.get("BITLY_TOKEN")
+
     user_link = input("Please enter your URL: ")
     if is_bitlink(BASE_URL, ENDPOINTS["is_bitlink"], user_link):
         try:
