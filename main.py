@@ -15,7 +15,7 @@ ENDPOINTS = {
 def shorten_link(token: str, base_url: str, endpoint: str, link: str) -> str:
     """Converts a long url to a Bitlink"""
 
-    url = base_url + endpoint
+    url = f"{base_url}{endpoint}"
     headers = {
         "Authorization": f"Bearer {token}",
         "Content-Type": "application/json",
@@ -36,7 +36,7 @@ def shorten_link(token: str, base_url: str, endpoint: str, link: str) -> str:
 def count_clicks(token: str, base_url: str, endpoint: str, bitlink: str) -> int:
     """Returns the click counts for a Bitlink"""
 
-    url = base_url + endpoint.format(bitlink)
+    url = f"{base_url}{endpoint.format(bitlink)}"
     headers = {
         "Authorization": f"Bearer {token}",
     }
@@ -52,9 +52,9 @@ def is_bitlink(token: str, base_url: str, endpoint: str, link: str) -> bool:
     """Check if URL is a Bitlink"""
 
     parsed_link = urllib.parse.urlparse(link)
-    bitlink = parsed_link.netloc + parsed_link.path
+    bitlink = f"{parsed_link.netloc}{parsed_link.path}"
 
-    url = base_url + endpoint.format(bitlink)
+    url = f"{base_url}{endpoint.format(bitlink)}"
     headers = {
         "Authorization": f"Bearer {token}",
     }
