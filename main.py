@@ -67,19 +67,19 @@ def is_bitlink(token: str, base_url: str, endpoint: str, link: str) -> bool:
 def main():
 
     load_dotenv()
-    TOKEN = os.environ.get("BITLY_TOKEN")
+    token = os.environ.get("BITLY_TOKEN")
 
     user_link = input("Please enter your URL: ")
-    if is_bitlink(TOKEN, BASE_URL, ENDPOINTS["is_bitlink"], user_link):
+    if is_bitlink(token, BASE_URL, ENDPOINTS["is_bitlink"], user_link):
         try:
-            count = count_clicks(TOKEN, BASE_URL, ENDPOINTS["clicks"], user_link)
+            count = count_clicks(token, BASE_URL, ENDPOINTS["clicks"], user_link)
         except requests.exceptions.HTTPError as e:
             print(f"Bitlink validation error - {e}")
         else:
             print("Click counts:", count)
     else:
         try:
-            bitlink = shorten_link(TOKEN, BASE_URL, ENDPOINTS["shorten"], user_link)
+            bitlink = shorten_link(token, BASE_URL, ENDPOINTS["shorten"], user_link)
         except requests.exceptions.HTTPError as e:
             print(f"URL validation error - {e}")
         else:
