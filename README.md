@@ -1,4 +1,4 @@
-# Урок 2. Посчитайте клики по ссылкам
+# Just another URL shortener CLI tool
 
 This project is a simple command line tool for shortening URLs via Bitly service.
 
