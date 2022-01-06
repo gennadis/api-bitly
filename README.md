@@ -24,11 +24,14 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
-4. Rename .env.example file to .env and place Bitly Token in it
+4. Create .env file and place your Bitly Token in it
+```python
+BITLY_TOKEN=place_your_token_here
+```
 
 5. Run
 ```bash
-python main.py URL
+python main.py http://example.com
 ```
 ## Examples
 
