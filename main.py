@@ -48,7 +48,7 @@ def count_clicks(token: str, base_url: str, endpoint: str, bitlink: str) -> int:
     return clicks
 
 
-def is_bitlink(base_url: str, endpoint: str, link: str) -> bool:
+def is_bitlink(token: str, base_url: str, endpoint: str, link: str) -> bool:
     """Check if URL is a Bitlink"""
 
     parsed_link = urllib.parse.urlparse(link)
@@ -56,7 +56,7 @@ def is_bitlink(base_url: str, endpoint: str, link: str) -> bool:
 
     url = base_url + endpoint.format(bitlink)
     headers = {
-        "Authorization": f"Bearer {TOKEN}",
+        "Authorization": f"Bearer {token}",
     }
 
     response = requests.get(url=url, headers=headers)
@@ -70,7 +70,7 @@ def main():
     TOKEN = os.environ.get("BITLY_TOKEN")
 
     user_link = input("Please enter your URL: ")
-    if is_bitlink(BASE_URL, ENDPOINTS["is_bitlink"], user_link):
+    if is_bitlink(TOKEN, BASE_URL, ENDPOINTS["is_bitlink"], user_link):
         try:
             count = count_clicks(TOKEN, BASE_URL, ENDPOINTS["clicks"], user_link)
         except requests.exceptions.HTTPError as e:
