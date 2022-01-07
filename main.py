@@ -13,9 +13,6 @@ ENDPOINTS = {
     "is_bitlink": "/v4/bitlinks/{}",  # bitlink
 }
 
-parser = argparse.ArgumentParser()
-parser.add_argument("link", help="enter link to shorten or to get clicks count of")
-
 
 def shorten_link(token: str, base_url: str, endpoint: str, link: str) -> str:
     """Converts a long url to a Bitlink"""
@@ -72,6 +69,9 @@ def is_bitlink(token: str, base_url: str, endpoint: str, link: str) -> bool:
 def main():
     load_dotenv()
     token = os.environ.get("BITLY_TOKEN")
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("link", help="enter link to shorten or to get clicks count of")
 
     args = parser.parse_args()
     user_link = args.link
